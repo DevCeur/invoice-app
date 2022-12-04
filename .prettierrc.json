@@ -1,4 +1,15 @@
 {
   "tabWidth": 2,
-  "singleQuote": true
+  "singleQuote": true,
+  "trailingComma": "all",
+  "importOrder": [
+    "^[./]",
+    "<THIRD_PARTY_MODULES>",
+    "^~/utils/(.*)$",
+    "^~/services/(.*)$",
+    "^~/components/(.*)$",
+    "^~/views/(.*)$"
+  ],
+  "importOrderSeparation": true,
+  "importOrderSortSpecifiers": true
 }
