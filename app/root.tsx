@@ -1,6 +1,11 @@
 import tailwindStyles from './styles/generated/tailwind.css';
+import { getThemeSession } from './utils/theme.server';
 
-import type { LinksFunction, MetaFunction } from '@remix-run/node';
+import type {
+  LinksFunction,
+  LoaderFunction,
+  MetaFunction,
+} from '@remix-run/node';
 import {
   Links,
   LiveReload,
@@ -8,7 +13,17 @@ import {
   Outlet,
   Scripts,
   ScrollRestoration,
+  useLoaderData,
 } from '@remix-run/react';
+import cn from 'classnames';
+
+import type { THEME } from '~/utils/enum';
+
+import { ThemeProvider } from '~/context/theme-context';
+
+import { useTheme } from '~/hooks/use-theme';
+
+import { NonFlashOfWrongTheme } from '~/components/shared/non-flashing-wrong-theme';
 
 export const meta: MetaFunction = () => ({
   charset: 'utf-8',
@@ -20,12 +35,31 @@ export const links: LinksFunction = () => [
   { rel: 'stylesheet', href: tailwindStyles },
 ];
 
+export type LoaderData = {
+  theme: THEME | null;
+};
+
+export const loader: LoaderFunction = async ({ request }) => {
+  const themeSession = await getThemeSession(request);
+
+  const data: LoaderData = {
+    theme: themeSession.getTheme(),
+  };
+
+  return data;
+};
+
 const App = () => {
+  const data = useLoaderData();
+
+  const { theme } = useTheme();
+
   return (
-    <html lang="en">
+    <html lang="en" className={cn(theme)}>
       <head>
         <Meta />
         <Links />
+        <NonFlashOfWrongTheme ssrTheme={Boolean(data.theme)} />
       </head>
       <body>
         <Outlet />
@@ -37,4 +71,14 @@ const App = () => {
   );
 };
 
-export default App;
+const AppWithProviders = () => {
+  const data = useLoaderData<LoaderData>();
+
+  return (
+    <ThemeProvider specifiedTheme={data.theme}>
+      <App />
+    </ThemeProvider>
+  );
+};
+
+export default AppWithProviders;
