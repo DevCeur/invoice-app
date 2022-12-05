@@ -23,3 +23,9 @@
     @apply bg-light-background dark:bg-dark-background text-text-default dark:text-dark-text-default;
   }
 }
+
+@layer components {
+  .button {
+    @apply text-sm font-bold px-6 py-4 rounded-full;
+  }
+}

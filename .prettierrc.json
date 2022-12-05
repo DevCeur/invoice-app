@@ -9,7 +9,9 @@
     "^~/services/(.*)$",
     "^~/context/(.*)$",
     "^~/hooks/(.*)$",
-    "^~/components/(.*)$",
+    "^~/components/layouts/(.*)$",
+    "^~/components/shared/(.*)$",
+    "^~/components/base/(.*)$",
     "^~/views/(.*)$"
   ],
   "importOrderSeparation": true,

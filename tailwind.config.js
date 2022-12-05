@@ -21,13 +21,15 @@ module.exports = {
 
         'purple-default': '#7C5DFA',
         'purple-light': '#9277FF',
+        'purple-dark': '#373B53',
+        'purple-darkest': '#252945',
 
         'red-default': '#EC5757',
         'red-light': '#9277FF',
 
         'green-default': '#33D69F',
 
-        'yellow-default': 'FF8F00',
+        'yellow-default': '#FF8F00',
       },
     },
   },
