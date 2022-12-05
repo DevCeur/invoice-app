@@ -7,7 +7,7 @@ type TextInputProps = {
 export const TextInput = ({ label, ...inputProps }: TextInputProps) => {
   return (
     <label className="flex flex-col space-y-2">
-      <span className="text-xs text-text-default dark:text-dark-text-default font-medium">
+      <span className="text-xs text-text-light dark:text-dark-text-light font-medium">
         {label}
       </span>
 

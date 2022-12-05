@@ -1,3 +1,7 @@
+import { Link } from '@remix-run/react';
+
+import { ROUTE } from '~/utils/enum';
+
 import { ThemeButton } from '~/components/shared/theme-button';
 
 type SignLayoutProps = {
@@ -8,8 +12,17 @@ type SignLayoutProps = {
 
 export const SignLayout = ({ children, title, summary }: SignLayoutProps) => {
   return (
-    <div className="w-full h-screen overflow-hidden flex flex-col justify-center items-center">
-      <ThemeButton />
+    <div className="relative w-full h-screen overflow-hidden flex flex-col justify-center items-center">
+      <div className="absolute z-10 top-0 w-full flex justify-between items-center px-10 py-6">
+        <Link
+          to={ROUTE.HOME}
+          className="text-xl dark:text-dark-text-light font-semibold"
+        >
+          Invoice App
+        </Link>
+
+        <ThemeButton />
+      </div>
 
       <div className="w-full max-w-lg bg-white border dark:bg-dark-background border-slate-200 dark:border-purple-darkest py-8 px-10 rounded-xl">
         <header className="mb-12">

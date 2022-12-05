@@ -16,7 +16,7 @@ export const SignInView = () => {
           <TextInput label="Password:" name="password" type="password" />
         </div>
 
-        <div className="flex flex-col justify-center items-center space-y-4">
+        <div className="flex flex-col justify-center items-center space-y-6">
           <Button fullWidth colorScheme="purple">
             Sign In
           </Button>

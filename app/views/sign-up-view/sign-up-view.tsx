@@ -33,7 +33,7 @@ export const SignUpView = () => {
           />
         </div>
 
-        <div className="flex flex-col justify-center items-center space-y-4">
+        <div className="flex flex-col justify-center items-center space-y-6">
           <Button fullWidth colorScheme="purple">
             Create Account
           </Button>
