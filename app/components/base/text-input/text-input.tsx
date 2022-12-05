@@ -12,7 +12,7 @@ export const TextInput = ({ label, ...inputProps }: TextInputProps) => {
       </span>
 
       <input
-        className="text-text-dark dark:text-white text-sm font-bold px-5 py-4 dark:bg-overlay-dark-background rounded border border-dark-text-light dark:border-purple-darkest outline-none focus:border-purple-default"
+        className="text-text-dark dark:text-white text-sm font-semibold px-5 py-4 dark:bg-overlay-dark-background rounded border border-dark-text-light dark:border-purple-darkest outline-none focus:border-purple-default"
         {...inputProps}
       />
     </label>
