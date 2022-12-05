@@ -1,5 +1,4 @@
 import tailwindStyles from './styles/generated/tailwind.css';
-import { getThemeSession } from './utils/theme.server';
 
 import type {
   LinksFunction,
@@ -18,12 +17,13 @@ import {
 import cn from 'classnames';
 
 import type { THEME } from '~/utils/enum';
+import { getThemeSession } from '~/utils/theme.server';
 
 import { ThemeProvider } from '~/context/theme-context';
 
 import { useTheme } from '~/hooks/use-theme';
 
-import { NonFlashOfWrongTheme } from '~/components/shared/non-flashing-wrong-theme';
+import { PreventThemeFlashing } from '~/components/shared/prevent-theme-flashing';
 
 export const meta: MetaFunction = () => ({
   charset: 'utf-8',
@@ -59,7 +59,7 @@ const App = () => {
       <head>
         <Meta />
         <Links />
-        <NonFlashOfWrongTheme ssrTheme={Boolean(data.theme)} />
+        <PreventThemeFlashing ssrTheme={Boolean(data.theme)} />
       </head>
       <body>
         <Outlet />

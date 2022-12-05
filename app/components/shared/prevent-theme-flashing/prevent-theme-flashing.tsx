@@ -35,7 +35,7 @@ const clientThemeCode = `
 })();
 `;
 
-export const NonFlashOfWrongTheme = ({ ssrTheme }: { ssrTheme: boolean }) => {
+export const PreventThemeFlashing = ({ ssrTheme }: { ssrTheme: boolean }) => {
   const { theme } = useTheme();
 
   return (
