@@ -31,6 +31,10 @@ const ThemeProvider = ({ children, specifiedTheme }: ThemeProviderProps) => {
       }
     }
 
+    if (typeof window !== 'object') {
+      return null;
+    }
+
     return getPreferredTheme();
   });
 

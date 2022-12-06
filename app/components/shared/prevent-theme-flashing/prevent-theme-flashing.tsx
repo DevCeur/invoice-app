@@ -7,20 +7,15 @@ const clientThemeCode = `
   const theme = window.matchMedia(${JSON.stringify(prefersDarkMQ)}).matches
     ? 'dark'
     : 'light';
-
   const cl = document.documentElement.classList;
-
   const themeAlreadyApplied = cl.contains('light') || cl.contains('dark');
-
   if (themeAlreadyApplied) {
-    console.warn(
-      "Daaaaamn",
-    );
+    console.log('theme applied')
   } else {
     cl.add(theme);
   }
-
   const meta = document.querySelector('meta[name=color-scheme]');
+
   if (meta) {
     if (theme === 'dark') {
       meta.content = 'dark';
@@ -29,7 +24,7 @@ const clientThemeCode = `
     }
   } else {
     console.warn(
-      "Daaaaaaaaamn",
+      'uhm.'
     );
   }
 })();
