@@ -1,5 +1,7 @@
 import cn from 'classnames';
+import { AnimatePresence, motion } from 'framer-motion';
 import type { ButtonHTMLAttributes } from 'react';
+import { AiOutlineLoading3Quarters } from 'react-icons/ai';
 
 enum COLOR_SCHEME {
   GRAY = 'gray',
@@ -19,12 +21,14 @@ const STYLE_BY_COLOR_SCHEME = {
 type ButtonProps = {
   children: React.ReactNode;
   fullWidth?: boolean;
+  isLoding?: boolean;
   colorScheme?: 'gray' | 'light-gray' | 'purple' | 'red';
 } & ButtonHTMLAttributes<HTMLButtonElement>;
 
 export const Button = ({
   children,
   fullWidth,
+  isLoding,
   colorScheme = 'gray',
   ...buttonProps
 }: ButtonProps) => {
@@ -37,7 +41,30 @@ export const Button = ({
       })}
       {...buttonProps}
     >
-      {children}
+      <AnimatePresence initial={false} mode="wait">
+        {isLoding ? (
+          <motion.span
+            key="spinner"
+            className="inline-block animate-spin"
+            initial={{ opacity: 0, translateY: -10 }}
+            animate={{ opacity: 1, translateY: 0 }}
+            exit={{ opacity: 0, translateY: 10 }}
+            transition={{ duration: 0.2 }}
+          >
+            <AiOutlineLoading3Quarters />
+          </motion.span>
+        ) : (
+          <motion.span
+            key="button-text"
+            initial={{ opacity: 0, translateY: -10 }}
+            animate={{ opacity: 1, translateY: 0 }}
+            exit={{ opacity: 0, translateY: 10 }}
+            transition={{ duration: 0.2 }}
+          >
+            {children}
+          </motion.span>
+        )}
+      </AnimatePresence>
     </button>
   );
 };

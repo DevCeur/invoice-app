@@ -26,6 +26,6 @@
 
 @layer components {
   .button {
-    @apply text-sm font-bold px-6 py-4 rounded-full;
+    @apply text-sm font-bold px-6 h-12 rounded-full;
   }
 }

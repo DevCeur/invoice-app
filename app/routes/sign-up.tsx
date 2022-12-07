@@ -21,9 +21,7 @@ export const action: ActionFunction = async ({ request }) => {
   try {
     const validFormData = formSchema.parse(formData);
 
-    const { user, errors } = await createUser({ data: validFormData });
-
-    console.dir({ user, errors }, { depth: 4 });
+    const { errors } = await createUser({ data: validFormData });
 
     if (errors) return { errors };
 

@@ -1,4 +1,4 @@
-import { Form, Link } from '@remix-run/react';
+import { Form, Link, useActionData, useTransition } from '@remix-run/react';
 
 import { ROUTE } from '~/utils/enum';
 
@@ -8,6 +8,11 @@ import { Button } from '~/components/base/button';
 import { TextInput } from '~/components/base/text-input';
 
 export const SignUpView = () => {
+  const actionData = useActionData();
+  const transition = useTransition();
+
+  const isLoading = transition.state === 'submitting';
+
   return (
     <SignLayout
       title="Create Account"
@@ -15,26 +20,37 @@ export const SignUpView = () => {
     >
       <Form method="post" action="/sign-up" className="flex flex-col gap-6">
         <div className="grid grid-cols-2 gap-6">
-          <TextInput label="Name:" name="name" />
+          <TextInput
+            label="Name:"
+            name="name"
+            error={actionData?.errors.name}
+          />
           <TextInput
             label="Username:"
             name="username"
             placeholder="e.g. JhonDoe07"
+            error={actionData?.errors.username}
           />
         </div>
 
         <div className="flex flex-col space-y-6 mb-6">
-          <TextInput label="Email:" name="email" type="email" />
+          <TextInput
+            label="Email:"
+            name="email"
+            type="email"
+            error={actionData?.errors.email}
+          />
           <TextInput
             label="Password:"
             name="password"
             type="password"
             placeholder="+6 characters"
+            error={actionData?.errors.password}
           />
         </div>
 
         <div className="flex flex-col justify-center items-center space-y-6">
-          <Button fullWidth colorScheme="purple">
+          <Button fullWidth isLoding={isLoading} colorScheme="purple">
             Create Account
           </Button>
           <Link
