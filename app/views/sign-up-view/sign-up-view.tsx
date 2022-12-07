@@ -13,7 +13,7 @@ export const SignUpView = () => {
       title="Create Account"
       summary="Fill the form below and start managing your invoices."
     >
-      <Form className="flex flex-col gap-6">
+      <Form method="post" action="/sign-up" className="flex flex-col gap-6">
         <div className="grid grid-cols-2 gap-6">
           <TextInput label="Name:" name="name" />
           <TextInput
