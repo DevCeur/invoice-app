@@ -4,6 +4,8 @@ import { z } from 'zod';
 
 import { formatZodError } from '~/utils/format-zod-error';
 
+import { createUser } from '~/services/ user.server';
+
 import { SignUpView } from '~/views/sign-up-view';
 
 export const action: ActionFunction = async ({ request }) => {
@@ -19,16 +21,20 @@ export const action: ActionFunction = async ({ request }) => {
   try {
     const validFormData = formSchema.parse(formData);
 
-    // create user on db
+    const { user, errors } = await createUser({ data: validFormData });
+
+    console.dir({ user, errors }, { depth: 4 });
+
+    if (errors) return { errors };
 
     // create user session
 
     // replace to redirect the user to dashboard
-    return { success: true, validFormData };
+    return { success: true };
   } catch (e) {
     const errors = formatZodError({ error: e as ZodError });
 
-    return { success: false, errors };
+    return { errors };
   }
 };
 
