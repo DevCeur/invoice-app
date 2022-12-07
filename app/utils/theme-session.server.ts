@@ -11,7 +11,7 @@ if (!themeSessionSecret) {
 
 const themeStorage = createCookieSessionStorage({
   cookie: {
-    name: 'invoice_app_remix_theme',
+    name: 'invoice_app/theme_cookie',
     secure: true,
     secrets: [themeSessionSecret],
     sameSite: 'lax',

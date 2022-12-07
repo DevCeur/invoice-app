@@ -1,8 +1,11 @@
+import { redirect } from '@remix-run/node';
 import type { ActionFunction } from '@remix-run/node';
 import type { ZodError } from 'zod';
 import { z } from 'zod';
 
+import { ROUTE } from '~/utils/enum';
 import { formatZodError } from '~/utils/format-zod-error';
+import { commitSession, getUserSession } from '~/utils/user-session.server';
 
 import { createUser } from '~/services/ user.server';
 
@@ -21,14 +24,18 @@ export const action: ActionFunction = async ({ request }) => {
   try {
     const validFormData = formSchema.parse(formData);
 
-    const { errors } = await createUser({ data: validFormData });
+    const { user, errors } = await createUser({ data: validFormData });
 
+    // this errors corresponds to the user creation on the database
     if (errors) return { errors };
 
-    // create user session
+    const userSession = await getUserSession({ request });
 
-    // replace to redirect the user to dashboard
-    return { success: true };
+    userSession.set('userId', user?.id);
+
+    return redirect(ROUTE.DASHBOARD, {
+      headers: { 'Set-Cookie': await commitSession(userSession) },
+    });
   } catch (e) {
     const errors = formatZodError({ error: e as ZodError });
 

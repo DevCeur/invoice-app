@@ -17,7 +17,7 @@ import {
 import cn from 'classnames';
 
 import type { THEME } from '~/utils/enum';
-import { getThemeSession } from '~/utils/theme.server';
+import { getThemeSession } from '~/utils/theme-session.server';
 
 import { ThemeProvider } from '~/context/theme-context';
 

@@ -2,7 +2,7 @@ import { json } from '@remix-run/node';
 import type { ActionFunction } from '@remix-run/node';
 
 import { isTheme } from '~/utils/is-theme';
-import { getThemeSession } from '~/utils/theme.server';
+import { getThemeSession } from '~/utils/theme-session.server';
 
 export const action: ActionFunction = async ({ request }) => {
   const themeSession = await getThemeSession(request);
