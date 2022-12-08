@@ -52,6 +52,36 @@ export const createUser = async ({ data }: CreateUserOptions) => {
       };
     }
 
-    return { user: null, errors: e };
+    return {
+      user: null,
+      errors: { server: 'There was an error creating the user' },
+    };
+  }
+};
+
+type SignInUserOptions = {
+  data: { email: string; password: string };
+};
+
+export const signInUser = async ({ data }: SignInUserOptions) => {
+  try {
+    const user = await prisma.user.findUnique({ where: { email: data.email } });
+
+    if (!user) {
+      return { user: null, errors: { email: 'It seems this email is wrong' } };
+    }
+
+    const isPasswordValid = await argon2.verify(user.password, data.password);
+
+    if (!isPasswordValid) {
+      return { user: null, errors: { password: 'Wrong credentials' } };
+    }
+
+    return { user, errors: null };
+  } catch (e) {
+    return {
+      user: null,
+      errors: { server: 'There was an error signing user' },
+    };
   }
 };

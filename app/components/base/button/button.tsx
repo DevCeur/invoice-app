@@ -21,14 +21,14 @@ const STYLE_BY_COLOR_SCHEME = {
 type ButtonProps = {
   children: React.ReactNode;
   fullWidth?: boolean;
-  isLoding?: boolean;
+  isLoading?: boolean;
   colorScheme?: 'gray' | 'light-gray' | 'purple' | 'red';
 } & ButtonHTMLAttributes<HTMLButtonElement>;
 
 export const Button = ({
   children,
   fullWidth,
-  isLoding,
+  isLoading,
   colorScheme = 'gray',
   ...buttonProps
 }: ButtonProps) => {
@@ -42,7 +42,7 @@ export const Button = ({
       {...buttonProps}
     >
       <AnimatePresence initial={false} mode="wait">
-        {isLoding ? (
+        {isLoading ? (
           <motion.span
             key="spinner"
             className="inline-block animate-spin"

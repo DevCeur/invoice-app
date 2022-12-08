@@ -50,7 +50,7 @@ export const SignUpView = () => {
         </div>
 
         <div className="flex flex-col justify-center items-center space-y-6">
-          <Button fullWidth isLoding={isLoading} colorScheme="purple">
+          <Button fullWidth isLoading={isLoading} colorScheme="purple">
             Create Account
           </Button>
           <Link

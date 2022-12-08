@@ -1,4 +1,4 @@
-import { Form, Link } from '@remix-run/react';
+import { Form, Link, useActionData, useTransition } from '@remix-run/react';
 
 import { ROUTE } from '~/utils/enum';
 
@@ -8,16 +8,31 @@ import { Button } from '~/components/base/button';
 import { TextInput } from '~/components/base/text-input';
 
 export const SignInView = () => {
+  const actionData = useActionData();
+  const transition = useTransition();
+
+  const isLoading = transition.state === 'submitting';
+
   return (
     <SignLayout title="Welcome Back" summary="Nice to see you here again!">
-      <Form className="flex flex-col gap-6">
+      <Form method="post" action="/sign-in" className="flex flex-col gap-6">
         <div className="flex flex-col space-y-6 mb-6">
-          <TextInput label="Email:" name="email" type="email" />
-          <TextInput label="Password:" name="password" type="password" />
+          <TextInput
+            label="Email:"
+            name="email"
+            type="email"
+            error={actionData?.errors.email}
+          />
+          <TextInput
+            label="Password:"
+            name="password"
+            type="password"
+            error={actionData?.errors.password}
+          />
         </div>
 
         <div className="flex flex-col justify-center items-center space-y-6">
-          <Button fullWidth colorScheme="purple">
+          <Button fullWidth isLoading={isLoading} colorScheme="purple">
             Sign In
           </Button>
           <Link
