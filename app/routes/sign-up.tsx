@@ -1,15 +1,19 @@
 import { redirect } from '@remix-run/node';
-import type { ActionFunction } from '@remix-run/node';
+import type { ActionFunction, LoaderFunction } from '@remix-run/node';
 import type { ZodError } from 'zod';
 import { z } from 'zod';
 
+import { withAuth } from '~/utils/auth-policy.server';
 import { ROUTE } from '~/utils/enum';
 import { formatZodError } from '~/utils/format-zod-error';
 import { commitSession, getUserSession } from '~/utils/user-session.server';
 
-import { createUser } from '~/services/ user.server';
+import { createUser } from '~/services/user.server';
 
 import { SignUpView } from '~/views/sign-up-view';
+
+export const loader: LoaderFunction = ({ request }) =>
+  withAuth(request, { isPrivate: false });
 
 export const action: ActionFunction = async ({ request }) => {
   const formData = Object.fromEntries(await request.formData());

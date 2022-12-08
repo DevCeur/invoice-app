@@ -1,7 +1,30 @@
 import type { PrismaClientKnownRequestError } from '@prisma/client/runtime';
 import argon2 from 'argon2';
 
+import { getUserSession } from '~/utils/user-session.server';
+
 import { prisma } from '~/lib/prisma.server';
+
+type GetCurrentUserOptions = {
+  request: Request;
+};
+
+export const getCurrentUser = async ({ request }: GetCurrentUserOptions) => {
+  try {
+    const userSession = await getUserSession({ request });
+
+    const userId = await userSession.get('userId');
+
+    const currentUser = await prisma.user.findUnique({ where: { id: userId } });
+
+    return { user: currentUser, errors: null };
+  } catch (e) {
+    return {
+      user: null,
+      errors: 'There was an error getting the current user',
+    };
+  }
+};
 
 type CreateUserOptions = {
   data: { name: string; username: string; email: string; password: string };
