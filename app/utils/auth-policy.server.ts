@@ -24,7 +24,7 @@ export const withAuth: Policy<{ user: User | null }> = async (
   }
 
   if (!isPrivate && user) {
-    return redirect(ROUTE.DASHBOARD);
+    return redirect(ROUTE.INVOICES);
   }
 
   if (callback) {

@@ -19,6 +19,7 @@ module.exports = {
         'dark-text-light': '#DFE3FA',
         'dark-text-default': '#FFFFFF',
 
+        'purple-lightest': '#D0D7FF',
         'purple-default': '#7C5DFA',
         'purple-light': '#9277FF',
         'purple-dark': '#373B53',

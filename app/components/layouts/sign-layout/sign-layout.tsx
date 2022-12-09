@@ -21,7 +21,7 @@ export const SignLayout = ({ children, title, summary }: SignLayoutProps) => {
           Invoice App
         </Link>
 
-        <ThemeButton />
+        <ThemeButton showBackground />
       </div>
 
       <div className="w-full max-w-lg bg-white border dark:bg-dark-background border-slate-200 dark:border-purple-darkest py-8 px-10 rounded-xl">

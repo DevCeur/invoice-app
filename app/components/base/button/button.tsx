@@ -34,6 +34,7 @@ export const Button = ({
 }: ButtonProps) => {
   return (
     <button
+      disabled={isLoading}
       className={cn({
         button: true,
         [STYLE_BY_COLOR_SCHEME[colorScheme]]: true,

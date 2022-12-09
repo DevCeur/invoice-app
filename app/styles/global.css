@@ -28,4 +28,21 @@
   .button {
     @apply text-sm font-bold px-6 h-12 rounded-full;
   }
+
+  /* width */
+  ::-webkit-scrollbar {
+    @apply w-2;
+  }
+
+  /* Track */
+  ::-webkit-scrollbar-track {
+    @apply bg-light-background dark:bg-dark-background;
+  }
+
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    @apply bg-dark-text-light hover:bg-purple-lightest dark:bg-purple-darkest dark:hover:bg-overlay-dark-background rounded-full;
+  }
+
+  /* Handle on hover */
 }

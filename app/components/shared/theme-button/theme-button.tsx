@@ -5,7 +5,11 @@ import { THEME } from '~/utils/enum';
 
 import { useTheme } from '~/hooks/use-theme';
 
-export const ThemeButton = () => {
+type ThemeButtonProps = {
+  showBackground?: boolean;
+};
+
+export const ThemeButton = ({ showBackground }: ThemeButtonProps) => {
   const { theme, setTheme } = useTheme();
 
   const handleToggleTheme = () => {
@@ -17,7 +21,10 @@ export const ThemeButton = () => {
   return (
     <button
       onClick={handleToggleTheme}
-      className="w-12 h-12 text-2xl flex justify-center items-center bg-overlay-light-background hover:bg-gray-200 dark:bg-overlay-dark-background hover:dark:bg-purple-darkest rounded-full"
+      className={`w-12 h-12 text-2xl flex justify-center items-center ${
+        showBackground &&
+        'bg-overlay-light-background hover:bg-gray-200 dark:bg-overlay-dark-background hover:dark:bg-purple-darkest'
+      } rounded-full`}
     >
       <AnimatePresence initial={false} mode="wait">
         {theme === THEME.DARK ? (
